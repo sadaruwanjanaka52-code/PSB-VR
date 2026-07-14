@@ -1,0 +1,6 @@
+{
+  "name": "PSB Voucher Register",
+  "description": "A comprehensive dashboard and register for tracking and managing public service voucher records, complete with analytics, status tracking, and advanced filtering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
