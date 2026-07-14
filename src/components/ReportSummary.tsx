@@ -9,12 +9,8 @@ import {
   Check, 
   Download, 
   CalendarDays, 
-  DollarSign, 
   Layers, 
-  Users, 
-  ArrowUpRight,
-  TrendingDown,
-  Sparkles
+  Users
 } from "lucide-react";
 
 interface ReportSummaryProps {
@@ -149,9 +145,6 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
   const topUnitName = topUnitEntry ? topUnitEntry[0] : "No Records";
   const topUnitCount = topUnitEntry ? topUnitEntry[1] : 0;
 
-  // Maximum monthly spend to calculate relative progress bar widths
-  const maxMonthlySpend = Math.max(...monthlyData.map((m) => m.totalAmount)) || 1;
-
   // Copy report to clipboard
   const handleCopyTextReport = () => {
     let text = `=========================================\n`;
@@ -229,25 +222,25 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
   return (
     <div className="space-y-6">
       {/* Configuration & Controls */}
-      <div className="bg-[#161920] p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-white p-4 rounded-[6px] border border-[#D6D9DE] flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-600/10 text-indigo-400 rounded-lg border border-indigo-500/20">
+          <div className="p-2 bg-[#1F3A5F]/5 text-[#1F3A5F] rounded-[4px] border border-[#1F3A5F]/15">
             <CalendarDays size={20} />
           </div>
           <div>
-            <h3 className="text-sm font-extrabold uppercase text-white tracking-wider">Yearly & Monthly Financial Auditing</h3>
-            <p className="text-[11px] text-slate-400">Generate, print, and export official financial summaries for any fiscal period</p>
+            <h3 className="text-sm font-bold text-[#1E293B] uppercase tracking-wider">Yearly & Monthly Financial Auditing</h3>
+            <p className="text-xs text-[#64748B]">Generate, print, and export official financial summaries for any fiscal period</p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end">
           {/* Year selector dropdown */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Fiscal Year:</span>
+            <span className="text-xs font-semibold text-[#64748B] uppercase tracking-wider">Fiscal Year:</span>
             <select
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="px-3 py-1.5 bg-[#0A0C10] border border-slate-800 rounded-lg text-xs font-bold text-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="px-3 py-1.5 bg-white border border-[#D6D9DE] rounded-[4px] text-xs font-semibold text-[#1F3A5F] focus:outline-none focus:border-[#1F3A5F]"
             >
               {availableYears.map((yr) => (
                 <option key={yr} value={yr}>
@@ -261,16 +254,16 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
           <div className="flex items-center gap-1.5">
             <button
               onClick={handleCopyTextReport}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-semibold border border-slate-700 transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-white hover:bg-slate-50 text-[#1E293B] rounded-[4px] text-xs font-semibold border border-[#D6D9DE] transition-colors flex items-center gap-1.5"
               title="Copy Summary Report"
             >
-              {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
+              {copied ? <Check size={13} className="text-[#2E7D32]" /> : <Copy size={13} />}
               <span>{copied ? "Copied" : "Copy Report"}</span>
             </button>
 
             <button
               onClick={handleExportYearCsv}
-              className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg text-xs font-semibold border border-slate-700 transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-white hover:bg-slate-50 text-[#1E293B] rounded-[4px] text-xs font-semibold border border-[#D6D9DE] transition-colors flex items-center gap-1.5"
               title="Export Report to CSV"
             >
               <Download size={13} />
@@ -279,7 +272,7 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
 
             <button
               onClick={handlePrint}
-              className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 shadow-md shadow-indigo-600/15"
+              className="px-3 py-1.5 bg-[#1F3A5F] hover:bg-[#152842] text-white rounded-[4px] text-xs font-semibold transition-all flex items-center gap-1.5"
               title="Print Financial Statement"
             >
               <Printer size={13} />
@@ -290,26 +283,26 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
       </div>
 
       {/* Main Report Document Sheet (Interactive and beautifully styled for print) */}
-      <div id="printable-report-sheet" className="bg-[#161920] rounded-xl border border-slate-800 shadow-md p-6 space-y-6 print:bg-white print:text-black print:p-0 print:border-none print:shadow-none">
+      <div id="printable-report-sheet" className="bg-white rounded-[6px] border border-[#D6D9DE] p-6 space-y-6 print:p-0 print:border-none print:shadow-none">
         
         {/* Print Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-slate-800/80 pb-4 gap-4 print:border-black/20">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#D6D9DE] pb-4 gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 bg-indigo-600/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-bold uppercase rounded tracking-widest print:hidden">
-                Official Report
+              <span className="px-2 py-0.5 bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/15 text-[10px] font-bold uppercase rounded-[4px] tracking-widest print:hidden">
+                Official Statement
               </span>
               <span className="hidden print:inline-block font-bold text-xs text-slate-500">POLICE STAFF BUREAU (PSB)</span>
             </div>
-            <h2 className="text-lg font-extrabold text-white mt-1 print:text-black font-sans flex items-center gap-1.5">
+            <h2 className="text-xl font-bold text-[#1E293B] mt-1 font-sans flex items-center gap-1.5">
               <span>Financial Ledger Audit Report</span>
-              <span className="text-indigo-400 print:text-black font-normal font-mono text-sm">({selectedYear})</span>
+              <span className="text-[#1F3A5F] font-normal font-mono text-base">({selectedYear})</span>
             </h2>
-            <p className="text-[11px] text-slate-400 print:text-slate-600 mt-0.5">
+            <p className="text-xs text-[#64748B] mt-0.5">
               A comprehensive analytical overview of parsed treasury vouchers, settlement dates, and budget categories.
             </p>
           </div>
-          <div className="text-right md:text-right w-full md:w-auto font-mono text-[10px] text-slate-400 print:text-slate-700">
+          <div className="text-right md:text-right w-full md:w-auto font-mono text-xs text-[#64748B]">
             <div>Report ID: FY{selectedYear}-PSB</div>
             <div>Generated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</div>
           </div>
@@ -317,65 +310,65 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
 
         {/* Annual KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 print:grid-cols-4">
-          <div className="bg-[#0A0C10] p-4 rounded-xl border border-slate-800/80 space-y-1 print:border-black/15 print:bg-slate-50">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Total Transactions</span>
-            <div className="text-xl font-black text-white print:text-black font-sans">{annualCount} Vouchers</div>
-            <p className="text-[9px] text-slate-400">Total processed items in FY {selectedYear}</p>
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] space-y-1">
+            <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider">Total Transactions</span>
+            <div className="text-xl font-bold text-[#1E293B] font-sans">{annualCount} Vouchers</div>
+            <p className="text-[10px] text-[#64748B]">Total processed items in FY {selectedYear}</p>
           </div>
 
-          <div className="bg-[#0A0C10] p-4 rounded-xl border border-slate-800/80 space-y-1 print:border-black/15 print:bg-slate-50">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Total Expenditure</span>
-            <div className="text-xl font-black text-emerald-400 print:text-emerald-700 font-sans">{formatCurrency(annualTotalAmount)}</div>
-            <p className="text-[9px] text-slate-400">Sum of voucher face value</p>
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] space-y-1">
+            <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider">Total Expenditure</span>
+            <div className="text-xl font-bold text-[#2E7D32] font-sans">{formatCurrency(annualTotalAmount)}</div>
+            <p className="text-[10px] text-[#64748B]">Sum of voucher face value</p>
           </div>
 
-          <div className="bg-[#0A0C10] p-4 rounded-xl border border-slate-800/80 space-y-1 print:border-black/15 print:bg-slate-50">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Settled Payments</span>
-            <div className="text-xl font-black text-indigo-400 print:text-indigo-700 font-sans">{formatCurrency(annualTotalPaid)}</div>
-            <p className="text-[9px] text-slate-400">Total successfully paid to ITMIS</p>
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] space-y-1">
+            <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider">Settled Payments</span>
+            <div className="text-xl font-bold text-[#1F3A5F] font-sans">{formatCurrency(annualTotalPaid)}</div>
+            <p className="text-[10px] text-[#64748B]">Total successfully paid to ITMIS</p>
           </div>
 
-          <div className="bg-[#0A0C10] p-4 rounded-xl border border-slate-800/80 space-y-1 print:border-black/15 print:bg-slate-50">
-            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Outstanding Balance</span>
-            <div className={`text-xl font-black font-sans ${annualOutstanding > 0 ? "text-amber-400 print:text-amber-700" : "text-slate-400"}`}>
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] space-y-1">
+            <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider">Outstanding Balance</span>
+            <div className={`text-xl font-bold font-sans ${annualOutstanding > 0 ? "text-[#C62828]" : "text-[#64748B]"}`}>
               {formatCurrency(annualOutstanding)}
             </div>
-            <p className="text-[9px] text-slate-400">Awaiting processing or clearance</p>
+            <p className="text-[10px] text-[#64748B]">Awaiting processing or clearance</p>
           </div>
         </div>
 
         {/* Visual Insights Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 print:grid-cols-3">
-          <div className="bg-[#0A0C10]/40 p-4 rounded-xl border border-slate-800/60 flex items-center gap-3.5 print:border-black/10">
-            <div className="p-2 bg-indigo-600/10 text-indigo-400 rounded-lg shrink-0 print:text-indigo-700">
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] flex items-center gap-3.5">
+            <div className="p-2 bg-[#1F3A5F]/10 text-[#1F3A5F] rounded-[4px] shrink-0">
               <TrendingUp size={16} />
             </div>
             <div>
-              <span className="text-[9px] uppercase font-bold text-slate-500 tracking-wider block">Peak Spending Month</span>
-              <span className="text-xs font-bold text-slate-200 print:text-black block">{peakMonth}</span>
-              <span className="text-[10px] font-mono text-indigo-400 font-semibold print:text-indigo-700 block">{formatCurrency(peakMonthAmt)}</span>
+              <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider block">Peak Spending Month</span>
+              <span className="text-xs font-bold text-[#1E293B] block">{peakMonth}</span>
+              <span className="text-xs font-mono text-[#1F3A5F] font-semibold block">{formatCurrency(peakMonthAmt)}</span>
             </div>
           </div>
 
-          <div className="bg-[#0A0C10]/40 p-4 rounded-xl border border-slate-800/60 flex items-center gap-3.5 print:border-black/10">
-            <div className="p-2 bg-emerald-600/10 text-emerald-400 rounded-lg shrink-0 print:text-emerald-700">
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] flex items-center gap-3.5">
+            <div className="p-2 bg-[#2E7D32]/10 text-[#2E7D32] rounded-[4px] shrink-0">
               <Users size={16} />
             </div>
             <div>
-              <span className="text-[9px] uppercase font-bold text-slate-500 tracking-wider block">Top Payee / Supplier</span>
-              <span className="text-xs font-bold text-slate-200 print:text-black block truncate max-w-[170px]">{topPayeeName}</span>
-              <span className="text-[10px] font-mono text-emerald-400 font-semibold print:text-emerald-700 block">{formatCurrency(topPayeeAmount)}</span>
+              <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider block">Top Payee / Supplier</span>
+              <span className="text-xs font-bold text-[#1E293B] block truncate max-w-[170px]">{topPayeeName}</span>
+              <span className="text-xs font-mono text-[#2E7D32] font-semibold block">{formatCurrency(topPayeeAmount)}</span>
             </div>
           </div>
 
-          <div className="bg-[#0A0C10]/40 p-4 rounded-xl border border-slate-800/60 flex items-center gap-3.5 print:border-black/10">
-            <div className="p-2 bg-pink-600/10 text-pink-400 rounded-lg shrink-0 print:text-pink-700">
+          <div className="bg-[#F5F6F8] p-4 rounded-[6px] border border-[#D6D9DE] flex items-center gap-3.5">
+            <div className="p-2 bg-[#2F4F4F]/10 text-[#2F4F4F] rounded-[4px] shrink-0">
               <Layers size={16} />
             </div>
             <div>
-              <span className="text-[9px] uppercase font-bold text-slate-500 tracking-wider block">Highest Volume Unit</span>
-              <span className="text-xs font-bold text-slate-200 print:text-black block truncate max-w-[170px]">{topUnitName}</span>
-              <span className="text-[10px] font-mono text-pink-400 font-semibold print:text-pink-700 block">{topUnitCount} Vouchers Submitted</span>
+              <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider block">Highest Volume Unit</span>
+              <span className="text-xs font-bold text-[#1E293B] block truncate max-w-[170px]">{topUnitName}</span>
+              <span className="text-xs font-mono text-[#2F4F4F] font-semibold block">{topUnitCount} Vouchers Submitted</span>
             </div>
           </div>
         </div>
@@ -383,17 +376,17 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
         {/* Monthly Breakdown Table */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300 print:text-black flex items-center gap-1.5">
-              <Calendar size={13} className="text-indigo-400 print:text-black" />
+            <h3 className="text-sm font-bold uppercase tracking-wider text-[#1E293B] flex items-center gap-1.5">
+              <Calendar size={13} className="text-[#1F3A5F]" />
               <span>12-Month Auditing Breakdown</span>
             </h3>
-            <span className="text-[9px] text-slate-500 font-bold uppercase tracking-widest font-mono">LKR Base</span>
+            <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-widest font-mono">LKR Base</span>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-slate-800/80 print:border-black/20">
-            <table className="w-full text-left text-[11px] border-collapse">
+          <div className="overflow-x-auto rounded-[6px] border border-[#D6D9DE]">
+            <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-[#0A0C10] text-slate-400 font-bold border-b border-slate-800 print:bg-slate-100 print:text-black print:border-black/20">
+                <tr className="bg-[#1F3A5F] text-white font-semibold border-b border-[#D6D9DE]">
                   <th className="px-4 py-3">Month Name</th>
                   <th className="px-4 py-3 text-center">Vouchers</th>
                   <th className="px-4 py-3 text-right">Total Amount</th>
@@ -402,33 +395,33 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
                   <th className="px-4 py-3 pl-6 w-48 print:hidden">Annual Share %</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 print:divide-black/10">
-                {monthlyData.map((m) => {
+              <tbody className="divide-y divide-[#D6D9DE]">
+                {monthlyData.map((m, idx) => {
                   const sharePct = annualTotalAmount > 0 ? (m.totalAmount / annualTotalAmount) * 100 : 0;
                   return (
-                    <tr key={m.name} className="hover:bg-slate-800/25 transition-colors print:hover:bg-transparent">
-                      <td className="px-4 py-2.5 font-semibold text-slate-200 print:text-black">{m.name}</td>
-                      <td className="px-4 py-2.5 text-center font-mono font-medium text-slate-400 print:text-black">
-                        {m.count > 0 ? m.count : <span className="text-slate-600 print:text-slate-400">-</span>}
+                    <tr key={m.name} className={`${idx % 2 === 0 ? "bg-white" : "bg-[#F5F6F8]"} hover:bg-slate-100 transition-colors`}>
+                      <td className="px-4 py-2.5 font-semibold text-[#1E293B]">{m.name}</td>
+                      <td className="px-4 py-2.5 text-center font-mono font-medium text-[#64748B]">
+                        {m.count > 0 ? m.count : <span className="text-slate-400">-</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-right font-mono font-bold text-slate-200 print:text-black">
-                        {m.totalAmount > 0 ? formatCurrency(m.totalAmount) : <span className="text-slate-600 print:text-slate-400">-</span>}
+                      <td className="px-4 py-2.5 text-right font-mono font-bold text-[#1E293B]">
+                        {m.totalAmount > 0 ? formatCurrency(m.totalAmount) : <span className="text-slate-400">-</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-right font-mono text-emerald-400 print:text-emerald-700">
-                        {m.totalPaid > 0 ? formatCurrency(m.totalPaid) : <span className="text-slate-600 print:text-slate-400">-</span>}
+                      <td className="px-4 py-2.5 text-right font-mono text-[#2E7D32]">
+                        {m.totalPaid > 0 ? formatCurrency(m.totalPaid) : <span className="text-slate-400">-</span>}
                       </td>
-                      <td className="px-4 py-2.5 text-right font-mono text-amber-400 print:text-amber-700">
-                        {m.outstanding > 0 ? formatCurrency(m.outstanding) : <span className="text-slate-600 print:text-slate-400">-</span>}
+                      <td className="px-4 py-2.5 text-right font-mono text-[#C62828]">
+                        {m.outstanding > 0 ? formatCurrency(m.outstanding) : <span className="text-slate-400">-</span>}
                       </td>
                       <td className="px-4 py-2.5 pl-6 w-48 print:hidden">
                         <div className="flex items-center gap-2">
-                          <div className="h-1.5 flex-1 bg-[#0A0C10] rounded-full overflow-hidden">
+                          <div className="h-2 flex-1 bg-slate-200 rounded-[4px] overflow-hidden">
                             <div 
-                              className="h-full bg-indigo-600 rounded-full"
+                              className="h-full bg-[#1F3A5F] rounded-[4px]"
                               style={{ width: `${sharePct}%` }}
                             />
                           </div>
-                          <span className="font-mono text-[9px] text-slate-500 w-8 text-right">{sharePct.toFixed(0)}%</span>
+                          <span className="font-mono text-[10px] text-[#64748B] w-8 text-right">{sharePct.toFixed(0)}%</span>
                         </div>
                       </td>
                     </tr>
@@ -436,14 +429,14 @@ export default function ReportSummary({ records }: ReportSummaryProps) {
                 })}
 
                 {/* Totals Row */}
-                <tr className="bg-[#0A0C10]/80 font-bold text-white border-t border-slate-800 print:bg-slate-50 print:text-black print:border-black/20">
-                  <td className="px-4 py-3 text-xs uppercase font-extrabold text-indigo-400 print:text-black">Annual Ledger Totals</td>
+                <tr className="bg-[#1F3A5F]/10 font-bold text-[#1E293B] border-t border-[#D6D9DE]">
+                  <td className="px-4 py-3 text-xs uppercase font-bold text-[#1F3A5F]">Annual Ledger Totals</td>
                   <td className="px-4 py-3 text-center font-mono text-xs">{annualCount}</td>
-                  <td className="px-4 py-3 text-right font-mono text-xs text-white print:text-black">{formatCurrency(annualTotalAmount)}</td>
-                  <td className="px-4 py-3 text-right font-mono text-xs text-emerald-400 print:text-emerald-700">{formatCurrency(annualTotalPaid)}</td>
-                  <td className="px-4 py-3 text-right font-mono text-xs text-amber-400 print:text-amber-700">{formatCurrency(annualOutstanding)}</td>
+                  <td className="px-4 py-3 text-right font-mono text-xs text-[#1E293B]">{formatCurrency(annualTotalAmount)}</td>
+                  <td className="px-4 py-3 text-right font-mono text-xs text-[#2E7D32]">{formatCurrency(annualTotalPaid)}</td>
+                  <td className="px-4 py-3 text-right font-mono text-xs text-[#C62828]">{formatCurrency(annualOutstanding)}</td>
                   <td className="px-4 py-3 pl-6 print:hidden">
-                    <span className="text-[10px] text-slate-500 font-bold uppercase">100% Consolidated</span>
+                    <span className="text-[10px] text-[#64748B] font-bold uppercase">100% Consolidated</span>
                   </td>
                 </tr>
               </tbody>

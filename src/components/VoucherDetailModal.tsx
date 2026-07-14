@@ -10,8 +10,7 @@ import {
   FileCheck2, 
   CheckCircle, 
   AlertTriangle,
-  Clock,
-  ExternalLink
+  Clock
 } from "lucide-react";
 import { VoucherRecord } from "../types";
 
@@ -36,19 +35,19 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
     const s = status.toLowerCase();
     if (s.includes("approved") && !s.includes("not approved")) {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-bold bg-[#2E7D32]/10 text-[#2E7D32] border border-[#2E7D32]/20">
           <CheckCircle size={12} /> Approved
         </span>
       );
     } else if (s.includes("incomplete") || s.includes("not approved")) {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-rose-500/10 text-rose-400 border border-rose-500/20">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-bold bg-[#C62828]/10 text-[#C62828] border border-[#C62828]/20">
           <AlertTriangle size={12} /> Incomplete / Rejected
         </span>
       );
     } else {
       return (
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-bold bg-[#F9A825]/10 text-[#7B5B00] border border-[#F9A825]/20">
           <Clock size={12} /> Pending VR Verification
         </span>
       );
@@ -61,7 +60,7 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
 
   return (
     <AnimatePresence>
-      <div id="voucher-detail-modal-root" className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+      <div id="voucher-detail-modal-root" className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
         
         {/* Professional, printer-friendly custom CSS injection */}
         <style dangerouslySetInnerHTML={{ __html: `
@@ -281,21 +280,21 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="bg-[#161920] border border-slate-800 shadow-2xl rounded-2xl w-full max-w-4xl overflow-hidden"
+          className="bg-white border border-[#D6D9DE] shadow-xl rounded-[4px] w-full max-w-4xl overflow-hidden"
         >
           {/* Modal Header */}
-          <div className="bg-[#0A0C10] text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+          <div className="bg-[#1F3A5F] text-white px-6 py-4 flex items-center justify-between border-b border-[#D6D9DE]">
             <div className="flex items-center gap-3">
-              <FileCheck2 className="text-indigo-400" size={22} />
+              <FileCheck2 className="text-white" size={22} />
               <div>
-                <h2 className="text-base font-bold tracking-tight">Voucher Details Slip</h2>
-                <p className="text-[11px] text-slate-400 font-mono">S/NO: {voucher.serialNo}</p>
+                <h2 className="text-base font-bold tracking-wider uppercase">Voucher Details Slip</h2>
+                <p className="text-xs text-white/90 font-mono">S/NO: {voucher.serialNo}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <button
                 onClick={handlePrint}
-                className="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-300 hover:text-white transition-colors flex items-center gap-1.5 text-xs font-semibold"
+                className="px-3 py-1.5 bg-[#2F4F4F] hover:bg-[#1f3535] rounded-[4px] text-white transition-colors flex items-center gap-1.5 text-xs font-bold shadow-sm"
                 title="Print Audit Jacket"
               >
                 <Printer size={16} />
@@ -303,7 +302,7 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
               </button>
               <button
                 onClick={onClose}
-                className="p-1.5 hover:bg-slate-800/80 rounded-lg text-slate-400 hover:text-white transition-colors"
+                className="p-1.5 hover:bg-[#152842] rounded-[4px] text-white/80 hover:text-white transition-colors"
               >
                 <X size={20} />
               </button>
@@ -311,24 +310,24 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
           </div>
 
           {/* Modal Body */}
-          <div className="p-6 overflow-y-auto max-h-[75vh] space-y-6">
+          <div className="p-6 overflow-y-auto max-h-[75vh] space-y-6 bg-white">
             
             {/* Primary Status Banner */}
-            <div className="bg-[#0A0C10] border border-slate-800 rounded-xl p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="bg-[#F5F6F8] border border-[#D6D9DE] rounded-[4px] p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div className="space-y-1">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Current Ledger Status</span>
+                <span className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider block">Current Ledger Status</span>
                 <div className="flex items-center gap-3">
                   {getStatusBadge(voucher.statusOfVr)}
                   {voucher.paidVrStatus && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] text-xs font-bold bg-[#1F3A5F]/10 text-[#1F3A5F] border border-[#1F3A5F]/20">
                       {voucher.paidVrStatus}
                     </span>
                   )}
                 </div>
               </div>
               <div className="text-left sm:text-right">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Net Payable Amount</span>
-                <span className="text-xl font-bold font-sans text-white">{formatCurrency(voucher.voucherAmount)}</span>
+                <span className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider block">Net Payable Amount</span>
+                <span className="text-2xl font-bold font-sans text-[#1E293B]">{formatCurrency(voucher.voucherAmount)}</span>
               </div>
             </div>
 
@@ -336,55 +335,55 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
               {/* Section 1: Core Identification */}
-              <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 space-y-3">
-                <h3 className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800/50 pb-2">
-                  <Calendar size={14} className="text-indigo-500" />
+              <div className="border border-[#D6D9DE] rounded-[4px] p-4 bg-[#F5F6F8]/40 space-y-3">
+                <h3 className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-2 border-b border-[#D6D9DE] pb-2">
+                  <Calendar size={14} className="text-[#1F3A5F]" />
                   General Identification
                 </h3>
                 <div className="grid grid-cols-2 gap-y-3 gap-x-2 text-xs">
                   <div>
-                    <span className="text-slate-500 font-medium block">S/NO (System ID)</span>
-                    <span className="font-bold text-slate-300 font-mono">{voucher.serialNo}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">S/NO (System ID)</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{voucher.serialNo}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Date Generated</span>
-                    <span className="font-bold text-slate-300">{voucher.date || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Date Generated</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.date || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Unit VR NO</span>
-                    <span className="font-bold text-slate-300 font-mono">{voucher.unitVrNo || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Unit VR NO</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{voucher.unitVrNo || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Received Date</span>
-                    <span className="font-bold text-slate-300">{voucher.receivedDate || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Received Date</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.receivedDate || "-"}</span>
                   </div>
                 </div>
               </div>
 
               {/* Section 2: Payee & Accounting */}
-              <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 space-y-3">
-                <h3 className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800/50 pb-2">
-                  <Building2 size={14} className="text-indigo-500" />
+              <div className="border border-[#D6D9DE] rounded-[4px] p-4 bg-[#F5F6F8]/40 space-y-3">
+                <h3 className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-2 border-b border-[#D6D9DE] pb-2">
+                  <Building2 size={14} className="text-[#1F3A5F]" />
                   Payee & Budget Station
                 </h3>
                 <div className="space-y-2 text-xs">
                   <div>
-                    <span className="text-slate-500 font-medium block">Payee Designation / Name</span>
-                    <span className="font-bold text-slate-300">{voucher.payee || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Payee Designation / Name</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.payee || "-"}</span>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <span className="text-slate-500 font-medium block">Department / Unit</span>
-                      <span className="font-bold text-slate-300">{voucher.unit || "-"}</span>
+                      <span className="text-[#64748B] font-semibold block mb-0.5">Department / Unit</span>
+                      <span className="font-bold text-[#1E293B]">{voucher.unit || "-"}</span>
                     </div>
                     <div>
-                      <span className="text-slate-500 font-medium block">Description</span>
-                      <span className="font-bold text-slate-300 uppercase tracking-wide">{voucher.description || "-"}</span>
+                      <span className="text-[#64748B] font-semibold block mb-0.5">Description</span>
+                      <span className="font-bold text-[#1E293B] uppercase tracking-wide">{voucher.description || "-"}</span>
                     </div>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Vote Ledger Allocation</span>
-                    <span className="font-semibold text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 rounded-md px-2 py-1 block mt-1 leading-relaxed">
+                    <span className="text-[#64748B] font-semibold block mb-1">Vote Ledger Allocation</span>
+                    <span className="font-bold text-[#1F3A5F] bg-[#1F3A5F]/5 border border-[#1F3A5F]/15 rounded-[4px] px-2 py-1.5 block leading-relaxed">
                       {voucher.vote || "-"}
                     </span>
                   </div>
@@ -392,96 +391,96 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
               </div>
 
               {/* Section 3: Accounting & Ledger Valuation */}
-              <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 space-y-3 md:col-span-2">
-                <h3 className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800/50 pb-2">
-                  <DollarSign size={14} className="text-indigo-500" />
+              <div className="border border-[#D6D9DE] rounded-[4px] p-4 bg-[#F5F6F8]/40 space-y-3 md:col-span-2">
+                <h3 className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-2 border-b border-[#D6D9DE] pb-2">
+                  <DollarSign size={14} className="text-[#1F3A5F]" />
                   Accounting Ledger & Valuation
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 text-xs">
-                  <div className="p-2 bg-[#161920] rounded-lg border border-slate-800">
-                    <span className="text-slate-500 font-medium block mb-1">Voucher Amount</span>
-                    <span className="font-bold text-slate-300 font-mono">{formatCurrency(voucher.voucherAmount)}</span>
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[#D6D9DE]">
+                    <span className="text-[#64748B] font-semibold block mb-1">Voucher Amount</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{formatCurrency(voucher.voucherAmount)}</span>
                   </div>
-                  <div className="p-2 bg-[#161920] rounded-lg border border-slate-800">
-                    <span className="text-slate-500 font-medium block mb-1">Total Schedule Value</span>
-                    <span className="font-bold text-slate-300 font-mono">{formatCurrency(voucher.totalScheduleValue)}</span>
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[#D6D9DE]">
+                    <span className="text-[#64748B] font-semibold block mb-1">Total Schedule Value</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{formatCurrency(voucher.totalScheduleValue)}</span>
                   </div>
-                  <div className="p-2 bg-[#161920] rounded-lg border border-slate-800">
-                    <span className="text-slate-500 font-medium block mb-1">Cheque Value</span>
-                    <span className="font-bold text-slate-300 font-mono">{formatCurrency(voucher.chequeValue)}</span>
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[#D6D9DE]">
+                    <span className="text-[#64748B] font-semibold block mb-1">Cheque Value</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{formatCurrency(voucher.chequeValue)}</span>
                   </div>
-                  <div className="p-2 bg-[#161920] rounded-lg border border-slate-800">
-                    <span className="text-slate-500 font-medium block mb-1">Cross Entry Adjustment</span>
-                    <span className="font-bold text-slate-300 font-mono">{formatCurrency(voucher.crossEntry)}</span>
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[#D6D9DE]">
+                    <span className="text-[#64748B] font-semibold block mb-1">Cross Entry Adjustment</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{formatCurrency(voucher.crossEntry)}</span>
                   </div>
-                  <div className="p-2 bg-[#161920] rounded-lg border border-slate-800">
-                    <span className="text-slate-500 font-medium block mb-1">Total Paid (Settle)</span>
-                    <span className="font-bold text-slate-300 font-mono">{formatCurrency(voucher.totalPaid)}</span>
+                  <div className="p-2.5 bg-white rounded-[4px] border border-[#D6D9DE] bg-[#2E7D32]/5 border-[#2E7D32]/20">
+                    <span className="text-[#2E7D32] font-bold block mb-1">Total Paid (Settle)</span>
+                    <span className="font-bold text-[#2E7D32] font-mono">{formatCurrency(voucher.totalPaid)}</span>
                   </div>
                 </div>
               </div>
 
               {/* Section 4: ITMIS Treasury Tracking */}
-              <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 space-y-3">
-                <h3 className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800/50 pb-2">
-                  <Briefcase size={14} className="text-indigo-500" />
+              <div className="border border-[#D6D9DE] rounded-[4px] p-4 bg-[#F5F6F8]/40 space-y-3">
+                <h3 className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-2 border-b border-[#D6D9DE] pb-2">
+                  <Briefcase size={14} className="text-[#1F3A5F]" />
                   ITMIS Treasury System Integration
                 </h3>
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <span className="text-slate-500 font-medium block">Handover Date to Subject</span>
-                    <span className="font-bold text-slate-300">{voucher.handOverDateToSubject || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Handover Date to Subject</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.handOverDateToSubject || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Handover Date to ITMIS</span>
-                    <span className="font-bold text-slate-300">{voucher.handOverDateToItmis || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Handover Date to ITMIS</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.handOverDateToItmis || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">ITMIS EV Number</span>
-                    <span className="font-bold text-slate-300 font-mono">{voucher.itmisEvNo || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">ITMIS EV Number</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{voucher.itmisEvNo || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Status of Payment</span>
-                    <span className="font-bold text-slate-300">{voucher.statusOfPmt || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Status of Payment</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.statusOfPmt || "-"}</span>
                   </div>
                 </div>
               </div>
 
               {/* Section 5: Cheque & Settlement Details */}
-              <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 space-y-3">
-                <h3 className="text-xs font-extrabold text-indigo-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800/50 pb-2">
-                  <Tag size={14} className="text-indigo-500" />
+              <div className="border border-[#D6D9DE] rounded-[4px] p-4 bg-[#F5F6F8]/40 space-y-3">
+                <h3 className="text-xs font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-2 border-b border-[#D6D9DE] pb-2">
+                  <Tag size={14} className="text-[#1F3A5F]" />
                   Cheque & Settlement Specifications
                 </h3>
                 <div className="grid grid-cols-2 gap-3 text-xs">
                   <div>
-                    <span className="text-slate-500 font-medium block">Paid Date</span>
-                    <span className="font-bold text-slate-300">{voucher.paidDate || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Paid Date</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.paidDate || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Schedule Number</span>
-                    <span className="font-bold text-slate-300 font-mono">{voucher.scheduleNo || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Schedule Number</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{voucher.scheduleNo || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Cheque Number</span>
-                    <span className="font-bold text-slate-300 font-mono">{voucher.chequeNo || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Cheque Number</span>
+                    <span className="font-bold text-[#1E293B] font-mono">{voucher.chequeNo || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Handover Designation</span>
-                    <span className="font-bold text-slate-300">{voucher.handoverTo || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Handover Designation</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.handoverTo || "-"}</span>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-medium block">Handover Date</span>
-                    <span className="font-bold text-slate-300">{voucher.handOverDate || "-"}</span>
+                    <span className="text-[#64748B] font-semibold block mb-0.5">Handover Date</span>
+                    <span className="font-bold text-[#1E293B]">{voucher.handOverDate || "-"}</span>
                   </div>
                 </div>
               </div>
 
               {/* Section 6: Optional user notes */}
               {voucher.notes && (
-                <div className="border border-indigo-500/20 rounded-xl p-4 bg-indigo-500/10 md:col-span-2 text-xs space-y-1">
-                  <span className="font-extrabold text-indigo-400 uppercase tracking-wider block">Registrar Notes & Comments</span>
-                  <p className="text-slate-300 leading-relaxed font-medium italic">"{voucher.notes}"</p>
+                <div className="border border-[#1F3A5F]/20 rounded-[4px] p-4 bg-[#1F3A5F]/5 md:col-span-2 text-xs space-y-1">
+                  <span className="font-bold text-[#1F3A5F] uppercase tracking-wider block">Registrar Notes & Comments</span>
+                  <p className="text-[#1E293B] leading-relaxed font-semibold italic">"{voucher.notes}"</p>
                 </div>
               )}
 
@@ -489,18 +488,18 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
           </div>
 
           {/* Modal Footer */}
-          <div className="bg-[#0A0C10] border-t border-slate-800 px-6 py-4 flex flex-col sm:flex-row gap-3 sm:justify-between items-center">
-            <span className="text-[10px] text-slate-500 font-medium">Department of Public Service Budgets • Internal Voucher Jacket</span>
+          <div className="bg-[#F5F6F8] border-t border-[#D6D9DE] px-6 py-4 flex flex-col sm:flex-row gap-3 sm:justify-between items-center">
+            <span className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider">Department of Public Service Budgets • Internal Voucher Jacket</span>
             <div className="flex gap-2">
               <button
                 onClick={() => onEdit(voucher)}
-                className="px-4 py-1.5 rounded-lg text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors shadow-sm shadow-indigo-950/20"
+                className="px-4 py-2 rounded-[4px] text-xs font-bold text-white bg-[#1F3A5F] hover:bg-[#152842] transition-colors shadow-sm"
               >
                 Modify Voucher Fields
               </button>
               <button
                 onClick={onClose}
-                className="px-4 py-1.5 rounded-lg text-xs font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+                className="px-4 py-2 rounded-[4px] text-xs font-bold text-[#1E293B] bg-white hover:bg-slate-50 border border-[#D6D9DE] transition-colors"
               >
                 Close Slip
               </button>
@@ -582,23 +581,23 @@ export default function VoucherDetailModal({ voucher, onClose, onEdit }: Voucher
               <tbody>
                 <tr>
                   <td>VOUCHER TOTAL VALUE (Gross Amount)</td>
-                  <td style={{ textAlign: "right" }} className="font-mono font-bold">{formatCurrency(voucher.voucherAmount)}</td>
+                  <td style={{ textAlign: "right" }} className="print-val font-mono font-bold">{formatCurrency(voucher.voucherAmount)}</td>
                 </tr>
                 <tr>
                   <td>TOTAL SCHEDULE VALUE (Breakdown)</td>
-                  <td style={{ textAlign: "right" }} className="font-mono">{formatCurrency(voucher.totalScheduleValue)}</td>
+                  <td style={{ textAlign: "right" }} className="print-val font-mono">{formatCurrency(voucher.totalScheduleValue)}</td>
                 </tr>
                 <tr>
                   <td>CHEQUE AMOUNT ISSUED</td>
-                  <td style={{ textAlign: "right" }} className="font-mono">{formatCurrency(voucher.chequeValue)}</td>
+                  <td style={{ textAlign: "right" }} className="print-val font-mono">{formatCurrency(voucher.chequeValue)}</td>
                 </tr>
                 <tr>
                   <td>CROSS ENTRY ADJUSTMENT VALUE</td>
-                  <td style={{ textAlign: "right" }} className="font-mono">{formatCurrency(voucher.crossEntry)}</td>
+                  <td style={{ textAlign: "right" }} className="print-val font-mono">{formatCurrency(voucher.crossEntry)}</td>
                 </tr>
                 <tr className="print-total-row">
                   <td>TOTAL SETTLED / PAID AMOUNT (Net Settlement)</td>
-                  <td style={{ textAlign: "right" }} className="font-mono font-bold">{formatCurrency(voucher.totalPaid)}</td>
+                  <td style={{ textAlign: "right" }} className="print-val font-mono font-bold">{formatCurrency(voucher.totalPaid)}</td>
                 </tr>
               </tbody>
             </table>

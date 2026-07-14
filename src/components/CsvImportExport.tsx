@@ -122,14 +122,14 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
 
   const handleImport = () => {
     if (!csvText.trim()) {
-      setStatusMessage({ type: "error", text: "Please paste valid CSV content into the box." });
+      setStatusMessage({ type: "error", text: "Please paste valid CSV content into the workspace." });
       return;
     }
 
     try {
       const parsedLines = parseCSV(csvText);
       if (parsedLines.length < 2) {
-        setStatusMessage({ type: "error", text: "Invalid file. CSV must contain a header row and at least one data row." });
+        setStatusMessage({ type: "error", text: "Invalid format. CSV must contain a header row and at least one data row." });
         return;
       }
 
@@ -189,14 +189,14 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
       }
 
       if (newRecords.length === 0) {
-        setStatusMessage({ type: "error", text: "No valid voucher data could be parsed. Check your format." });
+        setStatusMessage({ type: "error", text: "No valid voucher data could be parsed. Check your layout formatting." });
         return;
       }
 
       onImport(newRecords, overrideData);
       setStatusMessage({ 
         type: "success", 
-        text: `Successfully imported ${newRecords.length} records into the register!` 
+        text: `Successfully imported ${newRecords.length} records into the voucher register database.` 
       });
       setCsvText("");
     } catch (err: any) {
@@ -213,7 +213,7 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
       const text = event.target?.result as string;
       if (text) {
         setCsvText(text);
-        setStatusMessage({ type: "success", text: `File "${file.name}" loaded into workspace. Press "Import" below to execute.` });
+        setStatusMessage({ type: "success", text: `File "${file.name}" loaded. Click "Execute Import" below to apply changes.` });
       }
     };
     reader.readAsText(file);
@@ -221,71 +221,71 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
 
   return (
     <AnimatePresence>
-      <div id="csv-io-overlay" className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+      <div id="csv-io-overlay" className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          transition={{ duration: 0.2 }}
-          className="bg-[#161920] border border-slate-800 shadow-2xl rounded-2xl w-full max-w-2xl overflow-hidden flex flex-col"
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.15 }}
+          className="bg-white border border-[#D6D9DE] shadow-xl rounded-[6px] w-full max-w-2xl overflow-hidden flex flex-col"
         >
           {/* Header */}
-          <div className="bg-[#0A0C10] text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+          <div className="bg-[#1F3A5F] text-white px-6 py-4 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <FileSpreadsheet className="text-emerald-400" size={20} />
+              <FileSpreadsheet className="text-white opacity-90" size={20} />
               <div>
-                <h2 className="text-sm font-extrabold uppercase tracking-wide">Data Import / Export Center</h2>
-                <p className="text-[11px] text-slate-400">Migrate and back up your PSB register database</p>
+                <h2 className="text-base font-bold tracking-tight">Data Backup & Migration Utility</h2>
+                <p className="text-xs text-slate-200">Import or export financial registers via standard formats</p>
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-1 hover:bg-slate-800/80 rounded-lg text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 hover:bg-white/10 rounded-[4px] text-white/80 hover:text-white transition-colors"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
           </div>
 
           {/* Body */}
-          <div className="p-6 space-y-5 text-xs overflow-y-auto max-h-[75vh]">
+          <div className="p-6 space-y-5 text-sm overflow-y-auto max-h-[70vh]">
             
             {/* Export Card */}
-            <div className="border border-slate-800/60 rounded-xl p-4 bg-[#0A0C10]/40 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="border border-[#D6D9DE] rounded-[6px] p-4 bg-[#F5F6F8] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
-                <h3 className="font-extrabold text-white text-sm mb-0.5">Export Active Ledger</h3>
-                <p className="text-slate-400 text-[11px] leading-relaxed">
-                  Download all {records.length} registered vouchers as a standard `.csv` file compatible with Microsoft Excel, Numbers, and Google Sheets.
+                <h3 className="font-bold text-[#1E293B] text-sm mb-1">Export Voucher Database</h3>
+                <p className="text-[#64748B] text-xs leading-relaxed">
+                  Export the current register containing {records.length} records into a comma-separated values (.csv) format for backup or external auditing.
                 </p>
               </div>
               <button
                 onClick={handleExport}
-                className="px-4 py-2 text-slate-300 bg-slate-800 hover:bg-slate-700 font-bold rounded-lg border border-slate-700 transition-colors flex items-center gap-1.5 shrink-0"
+                className="px-4 py-2 text-xs font-semibold bg-[#1F3A5F] hover:bg-[#152842] text-white rounded-[6px] transition-colors flex items-center gap-1.5 shrink-0"
               >
                 <Download size={14} />
-                Export Ledger
+                Export CSV
               </button>
             </div>
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center" aria-hidden="true">
-                <div className="w-full border-t border-slate-800" />
+                <div className="w-full border-t border-[#D6D9DE]" />
               </div>
               <div className="relative flex justify-center text-xs font-semibold uppercase tracking-wider">
-                <span className="bg-[#161920] px-3 text-slate-500">or Import New Data</span>
+                <span className="bg-white px-3 text-[#64748B]">Import Records</span>
               </div>
             </div>
 
             {/* Status alerts */}
             {statusMessage && (
-              <div className={`p-3 rounded-xl border flex items-start gap-2.5 ${
+              <div className={`p-3 rounded-[6px] border flex items-start gap-2.5 text-xs ${
                 statusMessage.type === "success" 
-                ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" 
-                : "bg-rose-500/10 border-rose-500/20 text-rose-400"
+                ? "bg-green-50 border-green-200 text-[#2E7D32]" 
+                : "bg-red-50 border-red-200 text-[#C62828]"
               }`}>
                 {statusMessage.type === "success" ? (
-                  <CheckCircle2 size={16} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <CheckCircle2 size={16} className="text-[#2E7D32] shrink-0 mt-0.5" />
                 ) : (
-                  <AlertCircle size={16} className="text-rose-400 shrink-0 mt-0.5" />
+                  <AlertCircle size={16} className="text-[#C62828] shrink-0 mt-0.5" />
                 )}
                 <span className="font-medium">{statusMessage.text}</span>
               </div>
@@ -294,10 +294,10 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
             {/* Paste Box Area */}
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="font-extrabold text-slate-400 block">Paste Raw CSV String or Upload File</label>
-                <label className="cursor-pointer text-indigo-400 hover:text-indigo-300 font-bold flex items-center gap-1">
+                <label className="font-semibold text-[#1E293B] block">Paste Raw CSV Data or Select File</label>
+                <label className="cursor-pointer text-[#1F3A5F] hover:underline font-semibold flex items-center gap-1 text-xs">
                   <Upload size={13} />
-                  Choose File
+                  Upload Local File (.csv)
                   <input
                     type="file"
                     accept=".csv"
@@ -311,53 +311,54 @@ export default function CsvImportExport({ records, onImport, onClose }: CsvImpor
                 rows={5}
                 value={csvText}
                 onChange={(e) => setCsvText(e.target.value)}
-                placeholder={`Paste spreadsheet rows here. For example:
+                placeholder={`Paste spreadsheet rows here. Expected column alignment:
 25/120061,02/12/2025,185/25,M P C S YAKKALAMULLA,FUEL,225-1-1-0-1202-009 Pool Vehicle Fuel,"11,960.00",25-12-02,Approved`}
-                className="w-full px-3 py-2 bg-[#0A0C10] rounded-xl border border-slate-800 font-mono text-[10px] text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 placeholder-slate-600 leading-relaxed"
+                className="w-full px-3 py-2 bg-white rounded-[6px] border border-[#D6D9DE] font-mono text-xs text-[#1E293B] focus:outline-none focus:border-[#1F3A5F] placeholder-slate-400 leading-relaxed"
               />
             </div>
 
-            {/* Override checkbox & Info */}
+            {/* Override checkbox */}
             <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 id="override-checkbox"
                 checked={overrideData}
                 onChange={(e) => setOverrideData(e.target.checked)}
-                className="w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-800 bg-[#0A0C10]"
+                className="w-4 h-4 text-[#1F3A5F] border-[#D6D9DE] rounded focus:ring-[#1F3A5F]"
               />
-              <label htmlFor="override-checkbox" className="font-bold text-slate-400 cursor-pointer">
-                Wipe register and replace entirely with this data
+              <label htmlFor="override-checkbox" className="font-medium text-[#1E293B] cursor-pointer">
+                Wipe the active register and replace entirely with the imported records
               </label>
             </div>
 
-            {/* format instructions */}
-            <div className="bg-slate-800/20 border border-slate-800 rounded-xl p-3.5 space-y-1.5 text-slate-400">
-              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <HelpCircle size={12} /> Instructions for standard imports
+            {/* Format instructions */}
+            <div className="bg-[#F5F6F8] border border-[#D6D9DE] rounded-[6px] p-4 text-[#64748B] text-xs space-y-1.5">
+              <span className="font-bold text-[#1E293B] uppercase tracking-wider flex items-center gap-1.5 text-[10px]">
+                <HelpCircle size={13} className="text-[#1F3A5F]" /> Formatting Guidelines
               </span>
-              <p className="text-[10px] leading-relaxed">
-                We support copy-pasting directly from excel grids. Ensure columns are ordered: 
-                <strong> S/NO, Date, Unit VR No, Payee, Description, Vote, Unit, Voucher Amount, Hand Over Date, Status.</strong> Values with commas must be wrapped in quotation marks.
+              <p className="leading-relaxed">
+                Ensure rows match the government register database schema:
+                <strong className="block mt-1 font-mono text-[10px] text-[#1E293B]">S/NO, Date, Unit VR No, Payee, Description, Vote, Unit, Voucher Amount, Hand Over Date, Status</strong>
+                Wrap complex descriptions containing commas in standard double quotes.
               </p>
             </div>
 
           </div>
 
           {/* Footer */}
-          <div className="bg-[#0A0C10] border-t border-slate-800 px-6 py-4 flex items-center justify-end gap-2 shrink-0">
+          <div className="bg-[#F5F6F8] border-t border-[#D6D9DE] px-6 py-4 flex items-center justify-end gap-3 shrink-0">
             <button
               onClick={onClose}
-              className="px-4 py-2 rounded-lg text-xs font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+              className="px-4 py-2 text-xs font-semibold bg-white border border-[#D6D9DE] text-[#1E293B] hover:bg-[#E2E8F0] rounded-[6px] transition-colors"
             >
-              Close
+              Cancel
             </button>
             <button
               onClick={handleImport}
-              className="px-4 py-2 rounded-lg text-xs font-extrabold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors flex items-center gap-1.5 shadow-sm shadow-indigo-950/20"
+              className="px-4 py-2 text-xs font-semibold text-white bg-[#2E7D32] hover:bg-[#235E26] rounded-[6px] transition-colors flex items-center gap-1.5"
             >
               <FileCheck size={14} />
-              Import Data
+              Execute Import
             </button>
           </div>
         </motion.div>

@@ -9,7 +9,6 @@ import {
   Check,
   Building,
   Tag,
-  Search,
   ChevronDown
 } from "lucide-react";
 import { VoucherRecord } from "../types";
@@ -68,7 +67,7 @@ function SearchableSelect({ label, value, onChange, options, voteOptions, placeh
 
   return (
     <div ref={containerRef} className="relative w-full" id={`searchable-select-container-${id}`}>
-      <label className="block text-slate-400 font-extrabold uppercase tracking-widest text-[10px] mb-1.5">{label}</label>
+      <label className="block text-[#1E293B] font-bold text-xs mb-1">{label}</label>
       <div className="relative">
         <input
           type="text"
@@ -80,23 +79,23 @@ function SearchableSelect({ label, value, onChange, options, voteOptions, placeh
           }}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
-          className="w-full pl-3.5 pr-10 py-2.5 bg-[#0c0d12]/90 backdrop-blur-xs rounded-xl border border-slate-800/80 focus:outline-none focus:ring-2 focus:ring-indigo-500/30 focus:border-indigo-500 text-slate-200 font-bold placeholder-slate-600 transition-all text-xs"
+          className="w-full pl-3.5 pr-10 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-semibold placeholder-slate-400 text-xs transition-all"
           id={`searchable-select-input-${id}`}
         />
-        <div className="absolute right-3 top-3 flex items-center gap-1 text-slate-500">
-          <ChevronDown size={15} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-indigo-400" : ""}`} />
+        <div className="absolute right-3 top-2.5 flex items-center gap-1 text-[#64748B]">
+          <ChevronDown size={15} className={`transition-transform duration-300 ${isOpen ? "rotate-180 text-[#1F3A5F]" : ""}`} />
         </div>
       </div>
 
       {isOpen && (
         <div 
           id={`searchable-select-dropdown-${id}`}
-          className="absolute z-50 mt-1.5 w-full max-h-60 overflow-y-auto bg-[#0a0a0e]/95 backdrop-blur-xl border border-slate-800/80 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.6)] p-1.5 divide-y divide-slate-800/40 scrollbar-thin scrollbar-thumb-slate-800"
+          className="absolute z-50 mt-1 w-full max-h-60 overflow-y-auto bg-white border border-[#D6D9DE] rounded-[4px] shadow-md p-1.5 divide-y divide-[#D6D9DE] scrollbar-thin scrollbar-thumb-slate-200"
         >
           {options && (
             <div className="py-1">
               {filteredOptions.length === 0 ? (
-                <div className="p-3 text-center text-slate-500 text-[10px] font-bold tracking-wide uppercase italic">
+                <div className="p-3 text-center text-[#64748B] text-[10px] font-bold uppercase tracking-wide italic">
                   No matching units found. Keep typing to use custom.
                 </div>
               ) : (
@@ -105,10 +104,10 @@ function SearchableSelect({ label, value, onChange, options, voteOptions, placeh
                     key={opt}
                     type="button"
                     onClick={() => handleSelectOption(opt)}
-                    className="w-full text-left py-2 px-3 hover:bg-indigo-600/20 hover:text-indigo-200 rounded-lg cursor-pointer transition-colors font-bold text-slate-200 text-xs flex items-center justify-between"
+                    className="w-full text-left py-2 px-3 hover:bg-[#1F3A5F]/10 hover:text-[#1F3A5F] rounded-[4px] cursor-pointer transition-colors font-bold text-[#1E293B] text-xs flex items-center justify-between"
                   >
                     <span>{opt}</span>
-                    {value === opt && <Check size={14} className="text-indigo-400 shrink-0" />}
+                    {value === opt && <Check size={14} className="text-[#1F3A5F] shrink-0" />}
                   </button>
                 ))
               )}
@@ -118,7 +117,7 @@ function SearchableSelect({ label, value, onChange, options, voteOptions, placeh
           {voteOptions && (
             <div className="py-1">
               {filteredVotes.length === 0 ? (
-                <div className="p-3 text-center text-slate-500 text-[10px] font-bold tracking-wide uppercase italic">
+                <div className="p-3 text-center text-[#64748B] text-[10px] font-bold uppercase tracking-wide italic">
                   No matching budget votes found. Keep typing to use custom.
                 </div>
               ) : (
@@ -127,13 +126,13 @@ function SearchableSelect({ label, value, onChange, options, voteOptions, placeh
                     key={item.vote}
                     type="button"
                     onClick={() => handleSelectOption(item.vote)}
-                    className="w-full text-left py-2.5 px-3 hover:bg-indigo-600/20 hover:text-indigo-200 rounded-lg cursor-pointer transition-colors text-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-slate-800/10 last:border-b-0"
+                    className="w-full text-left py-2 px-3 hover:bg-[#1F3A5F]/10 hover:text-[#1F3A5F] rounded-[4px] cursor-pointer transition-colors text-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border-b border-[#D6D9DE] last:border-b-0"
                   >
                     <div className="flex-1 min-w-0 pr-2">
-                      <p className="font-bold text-slate-200 truncate">{item.vote}</p>
+                      <p className="font-bold text-[#1E293B] truncate">{item.vote}</p>
                     </div>
                     {item.code && item.code !== "-" && (
-                      <span className="shrink-0 self-start sm:self-center bg-[#0d0f14]/80 border border-slate-800 text-indigo-400 text-[9px] font-mono px-2 py-0.5 rounded-md font-extrabold uppercase tracking-widest shadow-inner">
+                      <span className="shrink-0 self-start sm:self-center bg-[#1F3A5F]/10 border border-[#1F3A5F]/20 text-[#1F3A5F] text-[9px] font-mono px-2 py-0.5 rounded-[4px] font-bold uppercase tracking-wider shadow-inner">
                         {item.code}
                       </span>
                     )}
@@ -317,22 +316,18 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
     const isoFormattedDate = formatIsoDate(today);
 
     // 1. General Info
-    let activeSerial = serialNo;
     if (!serialNo) {
       const nextS = getNextSerialNo(existingSerials);
       setSerialNo(nextS);
-      activeSerial = nextS;
     }
     if (!date) {
       setDate(currentFormattedDate);
     }
     
-    let currentPayee = payee;
     if (!payee) {
       // Pick a random payee preset
       const randomPreset = PAYEE_PRESETS[Math.floor(Math.random() * PAYEE_PRESETS.length)];
       setPayee(randomPreset.payee);
-      currentPayee = randomPreset.payee;
       setDescription(randomPreset.description);
       setVote(randomPreset.vote);
       setUnit(randomPreset.unit);
@@ -518,23 +513,23 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
   ];
 
   return (
-    <div id="voucher-form-root" className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-end">
+    <div id="voucher-form-root" className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-end">
       <motion.div
         initial={{ x: "100%" }}
         animate={{ x: 0 }}
         exit={{ x: "100%" }}
         transition={{ type: "spring", damping: 25, stiffness: 200 }}
-        className="bg-[#161920] border-l border-slate-800 h-full w-full max-w-xl flex flex-col shadow-2xl overflow-hidden"
+        className="bg-white border-l border-[#D6D9DE] h-full w-full max-w-xl flex flex-col shadow-xl overflow-hidden"
       >
         {/* Form Header */}
-        <div className="bg-[#0A0C10] text-white px-6 py-5 flex items-center justify-between border-b border-slate-800 shrink-0">
+        <div className="bg-[#1F3A5F] text-white px-6 py-5 flex items-center justify-between border-b border-[#D6D9DE] shrink-0">
           <div className="flex items-center gap-2.5">
-            <FileEdit className="text-indigo-400" size={20} />
+            <FileEdit className="text-white" size={20} />
             <div>
-              <h2 className="text-sm font-extrabold uppercase tracking-wide">
+              <h2 className="text-sm font-bold uppercase tracking-wider">
                 {voucher ? "Modify Ledger Entry" : "Create New Register Entry"}
               </h2>
-              <p className="text-[11px] text-slate-400 font-mono">
+              <p className="text-xs text-white/85 font-mono">
                 {voucher ? `S/NO: ${voucher.serialNo}` : "Enter voucher specifications carefully"}
               </p>
             </div>
@@ -544,7 +539,7 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
               <button
                 type="button"
                 onClick={handleAutoGenerateRemaining}
-                className="px-2.5 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 shadow-md shadow-indigo-600/10 active:scale-95"
+                className="px-2.5 py-1.5 bg-[#2E7D32] hover:bg-[#225e25] text-white rounded-[4px] text-[10px] font-bold uppercase tracking-wider transition-all flex items-center gap-1 active:scale-95"
                 title="Automatically generate a complete set of register fields"
               >
                 <span>✨ Auto-Fill</span>
@@ -552,7 +547,7 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             )}
             <button
               onClick={onCancel}
-              className="p-1.5 hover:bg-slate-800 rounded-lg text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 hover:bg-[#152842] rounded-[4px] text-white/80 hover:text-white transition-colors"
             >
               <X size={20} />
             </button>
@@ -560,14 +555,14 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
         </div>
 
         {/* Tab Selection */}
-        <div className="bg-[#0A0C10]/60 border-b border-slate-800 px-6 py-2 flex gap-4 text-xs font-semibold shrink-0">
+        <div className="bg-[#F5F6F8] border-b border-[#D6D9DE] px-6 py-2 flex gap-4 text-xs font-semibold shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab("general")}
             className={`pb-2 pt-1 border-b-2 transition-all flex items-center gap-1.5 ${
               activeTab === "general" 
-              ? "border-indigo-500 text-indigo-400" 
-              : "border-transparent text-slate-400 hover:text-slate-200"
+              ? "border-[#1F3A5F] text-[#1F3A5F] font-bold" 
+              : "border-transparent text-[#64748B] hover:text-[#1E293B]"
             }`}
           >
             <Building size={14} />
@@ -578,8 +573,8 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             onClick={() => setActiveTab("finance")}
             className={`pb-2 pt-1 border-b-2 transition-all flex items-center gap-1.5 ${
               activeTab === "finance" 
-              ? "border-indigo-500 text-indigo-400" 
-              : "border-transparent text-slate-400 hover:text-slate-200"
+              ? "border-[#1F3A5F] text-[#1F3A5F] font-bold" 
+              : "border-transparent text-[#64748B] hover:text-[#1E293B]"
             }`}
           >
             <Coins size={14} />
@@ -590,8 +585,8 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             onClick={() => setActiveTab("settlement")}
             className={`pb-2 pt-1 border-b-2 transition-all flex items-center gap-1.5 ${
               activeTab === "settlement" 
-              ? "border-indigo-500 text-indigo-400" 
-              : "border-transparent text-slate-400 hover:text-slate-200"
+              ? "border-[#1F3A5F] text-[#1F3A5F] font-bold" 
+              : "border-transparent text-[#64748B] hover:text-[#1E293B]"
             }`}
           >
             <Cpu size={14} />
@@ -600,7 +595,7 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-5 text-xs">
+        <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-6 space-y-5 text-xs bg-white">
           
           {/* TAB 1: GENERAL INFO */}
           {activeTab === "general" && (
@@ -611,61 +606,61 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             >
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Serial Number (S/NO) *</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Serial Number (S/NO) *</label>
                   <input
                     type="text"
                     required
                     value={serialNo}
                     onChange={(e) => setSerialNo(e.target.value)}
                     placeholder="e.g., 25/120061"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono font-semibold text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono font-bold text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Creation Date *</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Creation Date *</label>
                   <input
                     type="text"
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     placeholder="e.g., 02/12/2025"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-semibold text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-bold text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Unit VR Number</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Unit VR Number</label>
                   <input
                     type="text"
                     value={unitVrNo}
                     onChange={(e) => setUnitVrNo(e.target.value)}
                     placeholder="e.g., 185/25"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Received Date</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Received Date</label>
                   <input
                     type="text"
                     value={receivedDate}
                     onChange={(e) => setReceivedDate(e.target.value)}
                     placeholder="e.g., 25-12-05"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 font-bold mb-1">Name of the Payee *</label>
+                <label className="block text-[#1E293B] font-bold mb-1">Name of the Payee *</label>
                 <input
                   type="text"
                   required
                   value={payee}
                   onChange={(e) => handlePayeeChange(e.target.value)}
                   placeholder="e.g., M P C S YAKKALAMULLA"
-                  className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-bold text-slate-200 placeholder-slate-600"
+                  className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-bold text-[#1E293B] placeholder-slate-400"
                 />
               </div>
 
@@ -681,13 +676,13 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Description</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Description</label>
                   <input
                     type="text"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="e.g., FUEL"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 uppercase placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] uppercase placeholder-slate-400"
                   />
                 </div>
               </div>
@@ -712,18 +707,18 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
               animate={{ opacity: 1, x: 0 }} 
               className="space-y-4"
             >
-              <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-xl p-3.5 space-y-1 mb-2">
-                <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-wider flex items-center gap-1">
+              <div className="bg-[#1F3A5F]/10 border border-[#1F3A5F]/20 rounded-[4px] p-3.5 space-y-1 mb-2">
+                <span className="text-[10px] font-bold text-[#1F3A5F] uppercase tracking-wider flex items-center gap-1">
                   <Tag size={12} /> Live Auto Settlement
                 </span>
-                <p className="text-[10px] text-slate-400 leading-relaxed">
+                <p className="text-[11px] text-[#64748B] leading-relaxed">
                   Enter ledger balances in numeric format. Decimal fractions are supported.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Voucher Amount (LKR)</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Voucher Amount (LKR)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -735,24 +730,24 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
                       if (!chequeValue || chequeValue === "0") setChequeValue(e.target.value);
                       if (!totalPaid || totalPaid === "0") setTotalPaid(e.target.value);
                     }}
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono font-bold text-slate-200"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono font-bold text-[#1E293B]"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Total Schedule Value</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Total Schedule Value</label>
                   <input
                     type="number"
                     step="0.01"
                     value={totalScheduleValue}
                     onChange={(e) => setTotalScheduleValue(e.target.value)}
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-slate-200"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono text-[#1E293B]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Cheque Value (LKR)</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Cheque Value (LKR)</label>
                   <input
                     type="number"
                     step="0.01"
@@ -768,29 +763,29 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
                         setCrossEntry("0");
                       }
                     }}
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-slate-200"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono text-[#1E293B]"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Cross Entry Adjustment</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Cross Entry Adjustment</label>
                   <input
                     type="number"
                     step="0.01"
                     value={crossEntry}
                     onChange={(e) => setCrossEntry(e.target.value)}
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-slate-200"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono text-[#1E293B]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 font-bold mb-1">Total Paid (LKR)</label>
+                <label className="block text-[#1E293B] font-bold mb-1">Total Paid (LKR)</label>
                 <input
                   type="number"
                   step="0.01"
                   value={totalPaid}
                   onChange={(e) => setTotalPaid(e.target.value)}
-                  className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 font-mono font-bold text-slate-200"
+                  className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] font-mono font-bold text-[#1E293B]"
                 />
               </div>
             </motion.div>
@@ -805,142 +800,142 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             >
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Status of the VR</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Status of the VR</label>
                   <select
                     value={statusOfVr}
                     onChange={(e) => setStatusOfVr(e.target.value)}
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 text-slate-200 font-bold"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-bold"
                   >
                     {statusOptions.map((opt) => (
-                      <option key={opt} value={opt} className="bg-[#161920]">{opt}</option>
+                      <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">ITMIS EV Number</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">ITMIS EV Number</label>
                   <input
                     type="text"
                     value={itmisEvNo}
                     onChange={(e) => setItmisEvNo(e.target.value)}
                     placeholder="e.g., 45,994.00"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 font-mono placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-mono placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Handover to Subject Date</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Handover to Subject Date</label>
                   <input
                     type="text"
                     value={handOverDateToSubject}
                     onChange={(e) => setHandOverDateToSubject(e.target.value)}
                     placeholder="e.g., 25-12-02"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Handover to ITMIS Date</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Handover to ITMIS Date</label>
                   <input
                     type="text"
                     value={handOverDateToItmis}
                     onChange={(e) => setHandOverDateToItmis(e.target.value)}
                     placeholder="e.g., 25-12-04"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Status of Payment (PMT)</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Status of Payment (PMT)</label>
                   <input
                     type="text"
                     value={statusOfPmt}
                     onChange={(e) => setStatusOfPmt(e.target.value)}
                     placeholder="e.g., Paid, Completed"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Paid Date</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Paid Date</label>
                   <input
                     type="text"
                     value={paidDate}
                     onChange={(e) => setPaidDate(e.target.value)}
                     placeholder="e.g., 25-12-10"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Schedule Number</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Schedule Number</label>
                   <input
                     type="text"
                     value={scheduleNo}
                     onChange={(e) => setScheduleNo(e.target.value)}
                     placeholder="e.g., SCH-1049"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 font-mono placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-mono placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Cheque Number</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Cheque Number</label>
                   <input
                     type="text"
                     value={chequeNo}
                     onChange={(e) => setChequeNo(e.target.value)}
                     placeholder="e.g., CHQ-92810"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 font-mono placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-mono placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Handover To Designation</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Handover To Designation</label>
                   <input
                     type="text"
                     value={handoverTo}
                     onChange={(e) => setHandoverTo(e.target.value)}
                     placeholder="e.g., OIC Administration"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Handover Date</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Handover Date</label>
                   <input
                     type="text"
                     value={handOverDate}
                     onChange={(e) => setHandOverDate(e.target.value)}
                     placeholder="e.g., 25-12-08"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-slate-400 font-bold mb-1">Paid VR Status</label>
+                  <label className="block text-[#1E293B] font-bold mb-1">Paid VR Status</label>
                   <input
                     type="text"
                     value={paidVrStatus}
                     onChange={(e) => setPaidVrStatus(e.target.value)}
                     placeholder="e.g., Settled"
-                    className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 placeholder-slate-600"
+                    className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] placeholder-slate-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-400 font-bold mb-1">Registrar Remarks & Comments</label>
+                <label className="block text-[#1E293B] font-bold mb-1">Registrar Remarks & Comments</label>
                 <textarea
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   placeholder="e.g., Waiting for fuel logs approval..."
-                  className="w-full px-3 py-2 bg-[#0A0C10] rounded-lg border border-slate-800 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 text-slate-200 font-medium placeholder-slate-600"
+                  className="w-full px-3 py-2 bg-white rounded-[4px] border border-[#D6D9DE] focus:outline-none focus:border-[#1F3A5F] text-[#1E293B] font-medium placeholder-slate-400"
                 />
               </div>
             </motion.div>
@@ -949,24 +944,24 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
         </form>
 
         {/* Form Footer */}
-        <div className="bg-[#0A0C10] border-t border-slate-800 px-6 py-4 flex items-center justify-between shrink-0">
-          <div className="flex gap-1">
+        <div className="bg-[#F5F6F8] border-t border-[#D6D9DE] px-6 py-4 flex items-center justify-between shrink-0">
+          <div className="flex gap-1.5">
             <button
               type="button"
               onClick={() => setActiveTab("general")}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "general" ? "bg-indigo-500" : "bg-slate-800"}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "general" ? "bg-[#1F3A5F]" : "bg-slate-300"}`}
               title="Page 1"
             />
             <button
               type="button"
               onClick={() => setActiveTab("finance")}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "finance" ? "bg-indigo-500" : "bg-slate-800"}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "finance" ? "bg-[#1F3A5F]" : "bg-slate-300"}`}
               title="Page 2"
             />
             <button
               type="button"
               onClick={() => setActiveTab("settlement")}
-              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "settlement" ? "bg-indigo-500" : "bg-slate-800"}`}
+              className={`w-2.5 h-2.5 rounded-full transition-colors ${activeTab === "settlement" ? "bg-[#1F3A5F]" : "bg-slate-300"}`}
               title="Page 3"
             />
           </div>
@@ -975,14 +970,14 @@ export default function VoucherForm({ voucher, onSave, onCancel, existingUnits, 
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 rounded-lg text-xs font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 border border-slate-700 transition-colors"
+              className="px-4 py-2 bg-white hover:bg-slate-50 text-[#1E293B] rounded-[4px] text-xs font-semibold border border-[#D6D9DE] transition-colors"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSubmit}
-              className="px-4 py-2 rounded-lg text-xs font-extrabold text-white bg-indigo-600 hover:bg-indigo-500 transition-colors flex items-center gap-1.5 shadow-md shadow-indigo-900/15"
+              className="px-4 py-2 bg-[#1F3A5F] hover:bg-[#152842] text-white rounded-[4px] text-xs font-bold transition-colors flex items-center gap-1.5"
             >
               <Save size={14} />
               {voucher ? "Save Modifications" : "Register Voucher"}

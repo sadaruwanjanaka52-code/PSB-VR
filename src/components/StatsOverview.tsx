@@ -28,54 +28,54 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
       value: stats.totalCount,
       subValue: `${stats.approvedCount + stats.incompleteCount + stats.pendingCount} classified entries`,
       icon: FileText,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-indigo-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.05)]",
-      valueColor: "text-white text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-white to-slate-300",
-      iconColor: "text-indigo-400 bg-indigo-500/10 border border-indigo-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#1F3A5F] shadow-sm",
+      valueColor: "text-[#1E293B] text-2xl font-bold font-sans",
+      iconColor: "text-[#1F3A5F] bg-[#1F3A5F]/5 border border-[#1F3A5F]/15",
     },
     {
       title: "Total Voucher Value",
       value: formatCurrency(stats.totalVoucherAmount),
       subValue: `Avg: ${formatCurrency(stats.totalCount > 0 ? stats.totalVoucherAmount / stats.totalCount : 0)}`,
       icon: Coins,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-indigo-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(99,102,241,0.05)]",
-      valueColor: "text-indigo-400 text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400",
-      iconColor: "text-indigo-400 bg-indigo-500/10 border border-indigo-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#1F3A5F] shadow-sm",
+      valueColor: "text-[#1F3A5F] text-2xl font-bold font-sans",
+      iconColor: "text-[#1F3A5F] bg-[#1F3A5F]/5 border border-[#1F3A5F]/15",
     },
     {
       title: "Approved Vouchers",
       value: stats.approvedCount,
       subValue: `${((stats.approvedCount / (stats.totalCount || 1)) * 100).toFixed(1)}% of register`,
       icon: CheckCircle2,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-emerald-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(16,185,129,0.05)]",
-      valueColor: "text-emerald-400 text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300",
-      iconColor: "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#2E7D32] shadow-sm",
+      valueColor: "text-[#2E7D32] text-2xl font-bold font-sans",
+      iconColor: "text-[#2E7D32] bg-[#2E7D32]/5 border border-[#2E7D32]/15",
     },
     {
       title: "Pending / Processing",
       value: stats.pendingCount,
       subValue: `${stats.incompleteCount} flags needing attention`,
       icon: AlertCircle,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-amber-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(245,158,11,0.05)]",
-      valueColor: "text-amber-400 text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400",
-      iconColor: "text-amber-400 bg-amber-500/10 border border-amber-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#F9A825] shadow-sm",
+      valueColor: "text-[#D97706] text-2xl font-bold font-sans",
+      iconColor: "text-[#D97706] bg-[#F9A825]/5 border border-[#F9A825]/15",
     },
     {
       title: "Total Settled / Paid",
       value: formatCurrency(stats.totalPaidAmount),
       subValue: `${((stats.totalPaidAmount / (stats.totalVoucherAmount || 1)) * 100).toFixed(1)}% settlement rate`,
       icon: CreditCard,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-sky-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.05)]",
-      valueColor: "text-sky-400 text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-sky-400 to-blue-400",
-      iconColor: "text-sky-400 bg-sky-500/10 border border-sky-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#1F3A5F] shadow-sm",
+      valueColor: "text-[#1E293B] text-2xl font-bold font-sans",
+      iconColor: "text-[#1F3A5F] bg-[#1F3A5F]/5 border border-[#1F3A5F]/15",
     },
     {
       title: "Cross Entries / Adjustments",
       value: formatCurrency(stats.totalCrossEntry),
       subValue: `Pending Balance: ${formatCurrency(stats.totalPendingAmount)}`,
       icon: Scale,
-      color: "bg-[#101014]/65 backdrop-blur-md border border-white/5 hover:border-purple-500/20 shadow-[0_8px_30px_rgb(0,0,0,0.4)] hover:shadow-[0_8px_30px_rgba(168,85,247,0.05)]",
-      valueColor: "text-purple-400 text-xl sm:text-2xl font-black font-display bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400",
-      iconColor: "text-purple-400 bg-purple-500/10 border border-purple-500/20",
+      color: "bg-white border border-[#D6D9DE] hover:border-[#2F4F4F] shadow-sm",
+      valueColor: "text-[#2F4F4F] text-2xl font-bold font-sans",
+      iconColor: "text-[#2F4F4F] bg-[#2F4F4F]/5 border border-[#2F4F4F]/15",
     },
   ];
 
@@ -90,17 +90,17 @@ export default function StatsOverview({ stats }: StatsOverviewProps) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: idx * 0.05 }}
-            className={`p-5 rounded-2xl ${card.color} flex flex-col justify-between transition-all duration-300 group cursor-pointer hover:-translate-y-1`}
+            className={`p-4 rounded-[6px] ${card.color} flex flex-col justify-between transition-all duration-300 group`}
           >
             <div className="flex items-start justify-between gap-2">
-              <span className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 group-hover:text-slate-300 transition-colors">{card.title}</span>
-              <div className={`p-2 rounded-xl transition-transform duration-300 group-hover:scale-110 ${card.iconColor}`}>
-                <Icon size={15} />
+              <span className="text-xs font-semibold text-[#64748B] group-hover:text-[#1E293B] transition-colors">{card.title}</span>
+              <div className={`p-1.5 rounded-[4px] ${card.iconColor}`}>
+                <Icon size={14} />
               </div>
             </div>
             <div className="mt-4">
               <span className={`tracking-tight font-sans block truncate ${card.valueColor}`}>{card.value}</span>
-              <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 block mt-1.5">{card.subValue}</span>
+              <span className="text-[11px] font-medium text-[#64748B] block mt-1">{card.subValue}</span>
             </div>
           </motion.div>
         );

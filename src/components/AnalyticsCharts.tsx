@@ -97,16 +97,16 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
   return (
     <div id="analytics-dashboard" className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Col 1: Unit Chart */}
-      <div id="unit-chart-card" className="bg-[#161920] p-5 rounded-xl border border-slate-800 shadow-sm flex flex-col justify-between">
+      <div id="unit-chart-card" className="bg-white p-5 rounded-[4px] border border-[#D6D9DE] shadow-xs flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <BarChart3 size={18} className="text-indigo-400" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wide">Top Units Expenditure</h3>
+            <BarChart3 size={18} className="text-[#1F3A5F]" />
+            <h3 className="text-sm font-bold text-[#1E293B] uppercase tracking-wider">Top Units Expenditure</h3>
           </div>
-          <p className="text-xs text-slate-400 mb-6">Distribution of voucher totals across top Police administrative units.</p>
+          <p className="text-xs text-[#64748B] mb-6">Distribution of voucher totals across top Police administrative units.</p>
         </div>
 
-        <div className="h-56 flex items-end justify-between gap-2 px-2 relative">
+        <div className="h-56 flex items-end justify-between gap-2.5 px-2 relative">
           {topUnits.map(([unitName, value]) => {
             const pct = (value / maxUnitVal) * 100;
             const isHovered = activeUnitHover === unitName;
@@ -118,9 +118,9 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
                 onMouseLeave={() => setActiveUnitHover(null)}
               >
                 {/* Tooltip */}
-                <div className={`absolute bottom-[calc(${pct}%+12px)] z-20 bg-slate-950 text-white text-[10px] px-2 py-1 rounded border border-slate-800 shadow-lg transition-all duration-150 whitespace-nowrap pointer-events-none ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
-                  <span className="font-semibold block">{unitName}</span>
-                  <span className="text-indigo-400 font-mono font-medium">{formatCurrency(value)}</span>
+                <div className={`absolute bottom-[calc(${pct}%+12px)] z-20 bg-[#1F3A5F] text-white text-[10px] p-2.5 rounded-[4px] shadow-lg border border-[#D6D9DE]/20 transition-all duration-150 whitespace-nowrap pointer-events-none ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}>
+                  <span className="font-bold block">{unitName}</span>
+                  <span className="text-white/90 font-mono font-bold block mt-0.5">{formatCurrency(value)}</span>
                 </div>
 
                 {/* Column Bar */}
@@ -128,15 +128,15 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
                   initial={{ height: 0 }}
                   animate={{ height: `${pct}%` }}
                   transition={{ duration: 0.8, ease: "easeOut" }}
-                  className={`w-full rounded-t-md transition-all duration-200 ${
+                  className={`w-full rounded-t-[2px] transition-all duration-200 ${
                     isHovered 
-                      ? "bg-indigo-600 shadow-lg shadow-indigo-500/20" 
-                      : "bg-slate-800 group-hover:bg-slate-700"
+                      ? "bg-[#2F4F4F] shadow-md" 
+                      : "bg-[#1F3A5F]"
                   }`}
                 />
 
                 {/* Label */}
-                <div className="w-full text-center mt-2 overflow-hidden text-[9px] font-semibold text-slate-400 group-hover:text-indigo-400 whitespace-nowrap overflow-ellipsis">
+                <div className="w-full text-center mt-2 overflow-hidden text-[9px] font-bold text-[#64748B] group-hover:text-[#1F3A5F] whitespace-nowrap overflow-ellipsis">
                   {unitName.split(" ")[0]}
                 </div>
               </div>
@@ -144,20 +144,20 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
           })}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+        <div className="mt-4 pt-3 border-t border-[#D6D9DE] flex items-center justify-between text-xs text-[#64748B] font-semibold">
           <span>Max Unit Demand</span>
-          <span className="font-mono text-white font-bold">{formatCurrency(maxUnitVal)}</span>
+          <span className="font-mono text-[#1E293B] font-bold">{formatCurrency(maxUnitVal)}</span>
         </div>
       </div>
 
       {/* Col 2: Category Bar Gauge */}
-      <div id="category-chart-card" className="bg-[#161920] p-5 rounded-xl border border-slate-800 shadow-sm flex flex-col justify-between">
+      <div id="category-chart-card" className="bg-white p-5 rounded-[4px] border border-[#D6D9DE] shadow-xs flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <Layers size={18} className="text-indigo-400" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wide">Expenditure by Category</h3>
+            <Layers size={18} className="text-[#1F3A5F]" />
+            <h3 className="text-sm font-bold text-[#1E293B] uppercase tracking-wider">Expenditure by Category</h3>
           </div>
-          <p className="text-xs text-slate-400 mb-4">Voucher values grouped by the core nature of transaction.</p>
+          <p className="text-xs text-[#64748B] mb-4">Voucher values grouped by the core nature of transaction.</p>
         </div>
 
         <div className="space-y-3.5 my-auto">
@@ -166,16 +166,16 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
             const totalPct = (item.total / (totalValue || 1)) * 100;
             return (
               <div key={catName} className="space-y-1">
-                <div className="flex items-center justify-between text-[10px] font-semibold">
-                  <span className="text-slate-300 truncate max-w-[190px]">{catName}</span>
-                  <span className="font-mono text-white font-bold">{formatCurrency(item.total)} ({totalPct.toFixed(0)}%)</span>
+                <div className="flex items-center justify-between text-[10px] font-bold">
+                  <span className="text-[#1E293B] truncate max-w-[190px]">{catName}</span>
+                  <span className="font-mono text-[#1F3A5F]">{formatCurrency(item.total)} ({totalPct.toFixed(0)}%)</span>
                 </div>
-                <div className="h-2 w-full bg-[#0A0C10] rounded-full overflow-hidden">
+                <div className="h-2 w-full bg-[#F5F6F8] rounded-full overflow-hidden border border-[#D6D9DE]/30">
                   <motion.div 
                     initial={{ width: 0 }}
                     animate={{ width: `${pct}%` }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="h-full bg-indigo-600 rounded-full"
+                    className="h-full bg-[#1F3A5F] rounded-full"
                   />
                 </div>
               </div>
@@ -183,20 +183,20 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
           })}
         </div>
 
-        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center gap-1.5 text-[10px] text-slate-400">
-          <Tag size={12} className="text-indigo-400" />
+        <div className="mt-4 pt-3 border-t border-[#D6D9DE] flex items-center gap-1.5 text-[10px] text-[#64748B] font-semibold">
+          <Tag size={12} className="text-[#1F3A5F]" />
           <span>Voucher descriptions are dynamically classified into 8 financial votes.</span>
         </div>
       </div>
 
       {/* Col 3: Status Distribution Ring */}
-      <div id="status-chart-card" className="bg-[#161920] p-5 rounded-xl border border-slate-800 shadow-sm flex flex-col justify-between">
+      <div id="status-chart-card" className="bg-white p-5 rounded-[4px] border border-[#D6D9DE] shadow-xs flex flex-col justify-between">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <PieChart size={18} className="text-indigo-400" />
-            <h3 className="text-sm font-bold text-white uppercase tracking-wide">Approval Status Ring</h3>
+            <PieChart size={18} className="text-[#1F3A5F]" />
+            <h3 className="text-sm font-bold text-[#1E293B] uppercase tracking-wider">Approval Status Ring</h3>
           </div>
-          <p className="text-xs text-slate-400 mb-6">Percentage proportion of vouchers passed, pending or flagged.</p>
+          <p className="text-xs text-[#64748B] mb-6">Percentage proportion of vouchers passed, pending or flagged.</p>
         </div>
 
         <div className="flex items-center justify-around gap-2 my-auto">
@@ -207,7 +207,7 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
                 cx="50"
                 cy="50"
                 r="40"
-                className="stroke-slate-800"
+                className="stroke-slate-100"
                 strokeWidth="10"
                 fill="transparent"
               />
@@ -216,7 +216,7 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
                 cx="50"
                 cy="50"
                 r="40"
-                className="stroke-emerald-500"
+                className="stroke-[#2E7D32]"
                 strokeWidth="10"
                 fill="transparent"
                 strokeDasharray={`${2 * Math.PI * 40}`}
@@ -236,47 +236,47 @@ export default function AnalyticsCharts({ records }: AnalyticsChartsProps) {
                 animate={{ 
                   strokeDashoffset: 2 * Math.PI * 40 * (1 - pendingCount / totalStatusCount) 
                 }}
-                className="stroke-amber-400 transform origin-center rotate-[120deg]"
+                className="stroke-[#F9A825] transform origin-center rotate-[120deg]"
                 transition={{ duration: 1, ease: "easeOut", delay: 0.1 }}
               />
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-              <span className="text-2xl font-bold tracking-tight text-white font-sans">
+              <span className="text-2xl font-extrabold tracking-tight text-[#1E293B] font-sans">
                 {((approvedCount / totalStatusCount) * 100).toFixed(0)}%
               </span>
-              <span className="text-[9px] uppercase tracking-wider text-slate-400 font-semibold">Approved</span>
+              <span className="text-[9px] uppercase tracking-wider text-[#64748B] font-bold">Approved</span>
             </div>
           </div>
 
           {/* Key */}
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#2E7D32] shrink-0" />
               <div>
-                <span className="text-[10px] font-semibold text-slate-400 block">Approved</span>
-                <span className="text-xs font-bold text-white block font-mono">{approvedCount} ({((approvedCount/totalStatusCount)*100).toFixed(0)}%)</span>
+                <span className="text-[10px] font-bold text-[#64748B] block">Approved</span>
+                <span className="text-xs font-bold text-[#1E293B] block font-mono">{approvedCount} ({((approvedCount/totalStatusCount)*100).toFixed(0)}%)</span>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#F9A825] shrink-0" />
               <div>
-                <span className="text-[10px] font-semibold text-slate-400 block">Pending</span>
-                <span className="text-xs font-bold text-white block font-mono">{pendingCount} ({((pendingCount/totalStatusCount)*100).toFixed(0)}%)</span>
+                <span className="text-[10px] font-bold text-[#64748B] block">Pending</span>
+                <span className="text-xs font-bold text-[#1E293B] block font-mono">{pendingCount} ({((pendingCount/totalStatusCount)*100).toFixed(0)}%)</span>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#C62828] shrink-0" />
               <div>
-                <span className="text-[10px] font-semibold text-slate-400 block">Incomplete</span>
-                <span className="text-xs font-bold text-white block font-mono">{incompleteCount} ({((incompleteCount/totalStatusCount)*100).toFixed(0)}%)</span>
+                <span className="text-[10px] font-bold text-[#64748B] block">Incomplete</span>
+                <span className="text-xs font-bold text-[#1E293B] block font-mono">{incompleteCount} ({((incompleteCount/totalStatusCount)*100).toFixed(0)}%)</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-medium">
+        <div className="mt-4 pt-3 border-t border-[#D6D9DE] flex items-center justify-between text-xs text-[#64748B] font-semibold">
           <div className="flex items-center gap-1.5">
-            <TrendingUp size={12} className="text-emerald-400" />
+            <TrendingUp size={12} className="text-[#2E7D32]" />
             <span>Success Rate Goal: 90%</span>
           </div>
         </div>
